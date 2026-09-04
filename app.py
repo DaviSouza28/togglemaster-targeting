@@ -140,10 +140,10 @@ def update_rule(flag_name):
     values = []
     
     if 'rules' in data:
-        fields.append("rules = %s")
-        values.append(Json(data['rules'])) # Serializa o JSON
+        fields.append(sql.SQL("{} = %s").format(sql.Identifier("rules")))
+        values.append(Json(data['rules']))
     if 'is_enabled' in data:
-        fields.append("is_enabled = %s")
+        fields.append(sql.SQL("{} = %s").format(sql.Identifier("is_enabled")))
         values.append(data['is_enabled'])
     
     if not fields:
